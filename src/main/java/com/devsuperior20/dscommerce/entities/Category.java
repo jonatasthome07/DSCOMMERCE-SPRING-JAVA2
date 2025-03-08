@@ -1,78 +1,60 @@
 package com.devsuperior20.dscommerce.entities;
-import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
-import jakarta.persistence.Column;
+import java.util.Set;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "tb_payment")
-public class Payment {
+@Table (name = "tb_category")
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant moment;
+	private String name;
 	
-	@OneToOne
-	@MapsId
-	private Order order;
+	@ManyToMany
+	(mappedBy = "categories")
+	private Set <Product> products = new HashSet<>(); 
 	
-	
-	public Payment() {
+	public Category(){
 		}
 
-
-	public Payment(Long id, Instant moment, Order order) {
-		super();
+	public Category(Long id, String name) {
 		this.id = id;
-		this.moment = moment;
-		this.order = order;
+		this.name = name;
 	}
-
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-	public Instant getMoment() {
-		return moment;
+	public String getName() {
+		return name;
 	}
 
-
-	public void setMoment(Instant moment) {
-		this.moment = moment;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-
-	public Order getOrder() {
-		return order;
+	public Set<Product> getProducts() {
+		return products;
 	}
-
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,7 +64,7 @@ public class Payment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Payment other = (Payment) obj;
+		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
 	

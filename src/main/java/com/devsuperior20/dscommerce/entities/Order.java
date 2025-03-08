@@ -1,7 +1,6 @@
 package com.devsuperior20.dscommerce.entities;
 import java.time.Instant;
 import java.util.Objects;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
