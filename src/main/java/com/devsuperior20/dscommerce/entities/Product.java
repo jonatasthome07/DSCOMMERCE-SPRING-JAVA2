@@ -1,5 +1,6 @@
 package com.devsuperior20.dscommerce.entities;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class Product {
 
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private Set<Category> categories = new HashSet<>();
+	private Set <Category> categories = new HashSet<>();
 	
 	@OneToMany(mappedBy = "id.product")
 	private Set <OrderItem> items = new HashSet<>();
@@ -92,9 +93,14 @@ public class Product {
 		return categories;
 	}
 
-	
-	
-	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
+	public List <Order> getOrders() {
+		return items.stream().map(x -> x.getOrder()).toList();
+		}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
