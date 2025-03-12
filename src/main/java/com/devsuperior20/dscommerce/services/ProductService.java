@@ -32,8 +32,7 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public ProductDTO Insert (ProductDTO dto) {
-		
+	public ProductDTO insert (ProductDTO dto) {
 		Product entity = new Product();
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());
